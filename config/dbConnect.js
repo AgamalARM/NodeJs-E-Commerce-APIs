@@ -1,12 +1,16 @@
 const {default: mongoose} = require('mongoose');
 
 const dbConnect = () => {
-    try {
-        const conn = mongoose.connect();
-        console.log('Database connected successfully');
-    } catch (error) {
-        console.log('Database Error');
-    }
+    mongoose
+  .connect(process.env.DB_URI)
+  .then((conn) => {
+    console.log(`Database connected : ${conn.connection.host}`);
+  })
+  .catch((err) => {
+    console.error(`Database Error : ${err}`);
+    process.exit(1); // Stop node App
+  });
 };
+
 
 module.exports = dbConnect;
