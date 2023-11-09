@@ -1,8 +1,7 @@
-const {default: mongoose} = require('mongoose');
+const mongoose = require('mongoose');
 
 const dbConnect = () => {
-    mongoose
-  .connect(process.env.DB_URI)
+  mongoose.connect('mongodb+srv://user2000:test1234@cluster0.mxsmfkw.mongodb.net/alexstore?retryWrites=true&w=majority')
   .then((conn) => {
     console.log(`Database connected : ${conn.connection.host}`);
   })
