@@ -1,4 +1,5 @@
 const mongoose = require('mongoose'); // Erase if already required
+const bcrypt = require('bcryptjs');
 
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
@@ -24,6 +25,12 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+});
+
+// to encrypt hash the password
+userSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSaltSync(10);
+    this.password = await bcrypt.hashSync(this.password, salt);
 });
 
 //Export the model
