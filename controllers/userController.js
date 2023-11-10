@@ -23,7 +23,13 @@ const createUser = async (req,res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+  const {email, password} = req.body;
+  console.log(email, password);
+}
+
 
 // exports modules
-module.exports = { createUser
-    };
+module.exports = { createUser,
+                   loginUser
+                 };
