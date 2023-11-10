@@ -6,7 +6,7 @@ const asyncHandler = require('express-async-handler');
 
 
 //functions
-const createUser = asyncHandler(async (req,res) => {
+const createUser = async (req,res) => {
   const email = req.body.email;
   const findUser = await User.findOne({email: email});
   if (!findUser) {
@@ -21,7 +21,7 @@ const createUser = asyncHandler(async (req,res) => {
     });
     
   }
-});
+};
 
 
 // exports modules
