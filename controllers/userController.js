@@ -1,7 +1,7 @@
 // Models 
 const User = require('../models/userModel');
 //Error Handler
-const asyncHandler = require('express-async-handler');
+//const asyncHandler = require('express-async-handler');
 
 
 
@@ -25,7 +25,18 @@ const createUser = async (req,res) => {
 
 const loginUser = async (req, res) => {
   const {email, password} = req.body;
-  console.log(email, password);
+  // check if user exists or not
+  const findUser = await User.findOne({email});
+  if (findUser && (await findUser.isPasswordMatched(password))) {
+    res.json(findUser);
+    
+  } else {
+    res.json({
+      msg: "Invalid Credential",
+      success: false
+    });
+    
+  }
 }
 
 
